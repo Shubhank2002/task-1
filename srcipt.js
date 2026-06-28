@@ -30,9 +30,9 @@ grid.style.flexWrap = 'wrap'
 grid.style.gap = '40px'
 
 const colorData = {
-    blue: ['skyblue', 'lightblue', 'slateblue', 'royalblue', 'darkblue'],
-    red: ['red', 'darkred', 'hotpink'],
-    green: ['yellowgreen', 'limegreen', 'lime', 'green']
+    blue: ['lightskyblue', 'deepskyblue', 'dodgerblue', 'navy', 'mediumpurple'],
+    red: ['red', 'maroon', 'deeppink'],
+    green: ['yellow', 'greenyellow', 'chartreuse', 'darkgreen']
 }
 
 let activeThumb = null;
@@ -97,9 +97,19 @@ function renderThumbnail(filter = 'all') {
             grid.appendChild(thumb)
         })
     }
+    const firstThumb = grid.firstChild
+    if (firstThumb) {
+        firstThumb.style.border = '2px solid black'
+        activeThumb = firstThumb
+    }
 }
 
 leftSection.appendChild(grid)
+
+const select = document.createElement('select')
+select.style.padding = '8px'
+select.style.marginTop = '20px'
+select.style.fontSize = '16px'
 
 const buttonContainer = document.createElement('div')
 buttonContainer.style.display = 'flex'
@@ -113,7 +123,7 @@ All_Button.style.cursor = 'pointer'
 All_Button.style.border = '1px solid #999'
 All_Button.style.backgroundColor = 'white'
 All_Button.style.fontSize = '16px'
-All_Button.addEventListener('click', () => renderThumbnail('all'))
+All_Button.addEventListener('click', () => { renderThumbnail('all'); select.value = 'all' })
 buttonContainer.appendChild(All_Button)
 
 Object.keys(colorData).forEach((color, i) => {
@@ -124,14 +134,9 @@ Object.keys(colorData).forEach((color, i) => {
     color_button.style.border = '1px solid #999'
     color_button.style.backgroundColor = 'white'
     color_button.style.fontSize = '16px'
-    color_button.addEventListener('click', () => renderThumbnail(color))
+    color_button.addEventListener('click', () => { renderThumbnail(color); select.value = color })
     buttonContainer.appendChild(color_button)
 })
-
-const select = document.createElement('select')
-select.style.padding = '8px'
-select.style.marginTop = '20px'
-select.style.fontSize = '16px'
 
 const allOption = document.createElement('option')
 allOption.value = 'all'
