@@ -11,7 +11,9 @@ wrapper.appendChild(leftSection)
 const rightSection = document.createElement('div')
 rightSection.style.display = 'flex'
 rightSection.style.height = '70vh'
+rightSection.style.paddingLeft = '10vw'
 rightSection.style.flexDirection = 'column'
+rightSection.style.justifyContent = 'center'
 rightSection.style.alignItems = 'center'
 wrapper.appendChild(rightSection)
 
